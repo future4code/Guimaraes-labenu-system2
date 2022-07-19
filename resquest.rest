@@ -1,0 +1,45 @@
+### Buscar todos os usuarios
+GET http://localhost:3003/users 
+
+### Criar usuario
+PUT http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "name": "Robinho",
+    "email": "robinho@robinho.com",
+    "password": "naotemsenha"
+
+}
+
+### Buscar todos os produtos
+GET http://localhost:3003/products 
+
+
+### Criar produto
+PUT http://localhost:3003/products   
+Content-Type: application/json
+
+{
+    "name":"Razer Blade 14 - Full HD 144Hz - GeForce RTX 3060 - Black",
+    "price": 1999.99 ,
+    "img_url":"https://www.razer.com/gaming-laptops/Razer-Blade-14-/RZ09-0427EE23-R3U1"
+}
+
+
+###
+DELETE http://localhost:3003/users/2
+
+### Criar purchase
+PUT http://localhost:3003/purchase
+Content-Type: application/json
+
+{
+    "user_id": "1",
+    "product_id": "1",
+    "quantity": "3"
+
+}
+
+
+
