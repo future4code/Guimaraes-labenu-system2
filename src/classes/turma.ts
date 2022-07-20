@@ -1,21 +1,29 @@
 import { idText } from "typescript"
 import { Docente } from "./docente"
 import { Estudante } from "./estudante"
+import { ITurma } from "../interfaces/ITurma"
+import { TurmaServices } from "../core/services/TurmaServices"
 
-export class Turma {
-    public id: string
-    public nome: string
-    public docente: string []
-    public estudante: string []
-    public modulo: number
+export class Turma extends TurmaServices implements ITurma {
+    public nome?: string
+    public modulo_Id?: number
 
-    constructor (id: string, nome: string, docente: string [], estudante: string [], modulo: number){
-
-        this.id = id,
+    constructor (nome?: string, modulo_Id?: number){
+        super()
         this.nome = nome,
-        this.docente = docente,
-        this.estudante = estudante,
-        this.modulo = modulo
+        this.modulo_Id = modulo_Id
     }
+
+    async criarTurma(turma: Turma): Promise<void> {
+        this.createTurma(turma)
+    }
+
+    async buscarTurmaAtivas(): Promise<[]> {
+        return  await this.all()
+    }
+
+   mudarTurmaModulo(idTurmaAntiga: string, idTurmaNova: string): boolean {
+       return false
+   }
 
 }
