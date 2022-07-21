@@ -1,7 +1,5 @@
-import { Turma } from "../classes/turma"
+import { Docente } from "../classes/docente"
 
-export interface ITurma {
-    criarTurma(turma: Turma): Promise<void>
-    buscarTurmaAtivas(): Promise<[]>
-    mudarTurmaModulo(idTurmaAntiga: string, idTurmaNova: string): boolean
+export interface IDocente {
+    criarDocente(turma: Docente): Promise<void>
 }

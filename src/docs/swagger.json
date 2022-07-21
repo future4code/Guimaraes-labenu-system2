@@ -1,0 +1,104 @@
+{
+    "openapi": "3.0.0",
+        "info": {
+            "title": "LabenuSystem",
+            "description": "Essa API tem como objetivo a manipulação e disponibilização dos registro Turma, Docentes, Estudantes, Hobbies",
+            "termsOfServices": "",
+            "contact": {
+                "email": ""
+            },
+            "version": "1.0.0"
+        },
+        "servers":[
+            {
+                "url": "http://localhost:3003/v1",
+                "description": "API de test"
+            }
+        ],
+        "paths":{
+            "/criarTurma":{
+                "post":{
+                    "sumary": "",
+                    "description": "Essa rota será responsável por criar uma nova turma",
+                    "tags": ["Turma"],
+                    "requestBody":{
+                        "content":{
+                            "aplication/json":{
+                                "schema": {
+                                    "$ref": "#/components/schemas/Turma"
+                                },
+                                "exemples":{
+                                    "turma":{
+                                        "value":{
+                                            "nome": "Guimaraes turma A",
+                                            "modulo_id": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses":{
+                        "400":{
+                            "description": "Já existe uma turma com esse nome!"
+                        },
+                        "200":{
+                            "description": "OK",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Turma"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            "/buscarTurmasAtivas":{
+                "get":{
+                    "sumary": "",
+                    "description": "Essa rota será responsável por buscar todas as Turmas ativa no sistema",
+                    "tags": ["Turma"],
+                    "responses":{
+                        "403":{
+                            "description": "Nenhum registro encontrado!"
+                        },
+                        "200":{
+                            "description": "OK",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Turma"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "components":{
+            "schemas":{
+                "Turma":{
+                    "type": "object",
+                    "properties": {
+                        "nome": {
+                            "type": "string"
+                        },
+                        "modulo_id":{
+                            "type": "number",
+                            "description": "valor de 0 a 6 onde a posição 0 significa que a turma não foi iniciada"
+                        },
+                        "ativo":{
+                            "type": "number",
+                            "description": "valor default 1 onde significa ativo e 0 inativo"
+                        }
+                    }
+                }
+            }
+        }
+}
