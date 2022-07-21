@@ -1,9 +1,14 @@
 import { Turma } from "./classes/turma";
 import { app } from "./app";
 import { Request, Response } from "express";
-import { TurmaServices } from "./core/services/TurmaServices";
+import swaggerUi from 'swagger-ui-express'
+import swaggerFileDocument from './docs/swagger.json'
 
-app.get('/getAllTurma', async (req: Request, res: Response ) =>{
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFileDocument))
+
+const version: string = "v1"
+
+app.get(`/${version}/buscarTurmasAtivas`, async (req: Request, res: Response ) =>{
     try {
         const turma = new Turma()
         await turma.buscarTurmaAtivas()
