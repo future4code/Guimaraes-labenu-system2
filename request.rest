@@ -1,0 +1,15 @@
+### Criar Docente
+POST http://localhost:3003/v1/criarDocente
+Content-Type: application/json
+
+{
+    "nome": "Professor X",
+    "email": "x@x.com",
+    "dataNascimento": "11/06/1967",
+     "turma_Id": 1
+
+}
+
+### Buscar Docentes
+GET http://localhost:3003/v1/buscarDocentes
+Content-Type: application/json

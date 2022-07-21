@@ -3,6 +3,7 @@ import { IRepositoryBase } from "../repositoryInterfaces/IRepositoryBase";
 import { connection } from "../../data/connection";
 import { create } from "domain";
 import { promises } from "dns";
+import { table } from "console";
 
 export class RepositoryBase implements IRepositoryBase{
 
@@ -16,5 +17,18 @@ export class RepositoryBase implements IRepositoryBase{
 
     update(tableName: string, id: number): boolean{
         return false
+    }
+
+    updateDocente(tableName: string, idDocente: number, idTurma: number): boolean{
+       try {
+        connection(tableName).update({
+            turma_id: idTurma
+        }).where({
+            id: idDocente
+        })
+        return true
+       } catch (error) {
+        return false        
+       }
     }
 }
