@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerFileDocument from './docs/swagger.json'
 import { request } from "http";
 import { Docente } from './classes/docente'
+import { Estudante } from "./classes/estudante";
 import moment from "moment";
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFileDocument))
@@ -52,4 +53,17 @@ app.post(`/${version}/criarDocente`, async (req: Request, res: Response) => {
     const docente = new Docente(nome, email, newdataNascimento, turma_Id, 1)     
     const result: any =  await docente.criarDocente(docente)
      res.status(200).send({ message: "OK", result: result[0] })
+})
+
+
+app.get(`/${version}/buscarEstudantes`, async (req: Request, res: Response ) =>{
+    try {
+        const estudante = new Estudante()
+        await estudante.buscarEstudanteAtivos()
+        .then( response => res
+        .status(200).send(response) )
+        .catch( e =>   res.status(500).send({message: "Ocorreu um erro de sql ", result: e }) )
+    } catch (e) {
+        res.status(500).send({ message: 'Error', result: e })
+    }
 })

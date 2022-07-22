@@ -147,6 +147,42 @@
                         }
                     }
                 }
+            },
+
+
+            "/buscarEstudantes":{
+                "get":{
+                    "sumary": "",
+                    "description": "Essa rota será responsável por buscar todas as Turmas ativa no sistema",
+                    "tags": ["Estudantes"],
+                    "responses":{
+                        "403":{
+                            "description": "Nenhum registro encontrado!"
+                        },
+                        "200":{
+                            "description": "OK",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Estudantes"
+                                    }
+                                }
+                            }
+                        },
+                        "404":{
+                            "description": "Nenhum registro encontrado",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Estudantes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
         },
@@ -170,6 +206,28 @@
                 },
 
                 "Docente":{
+                    "type": "object",
+                    "properties": {
+                        "nome": {
+                            "type": "string"
+                        },
+                        "email":{
+                            "type": "string"
+                        },
+                        "dataNascimento":{
+                            "type": "string"
+                        },
+                        "turma_Id":{
+                            "type": "number"
+                        },
+                        "ativo":{
+                            "type": "number",
+                            "description": "valor default 1 onde significa ativo e 0 inativo"
+                        }
+                    }
+                },
+
+                "Estudantes":{
                     "type": "object",
                     "properties": {
                         "nome": {
