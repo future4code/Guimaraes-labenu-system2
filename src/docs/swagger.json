@@ -23,17 +23,9 @@
                     "tags": ["Turma"],
                     "requestBody":{
                         "content":{
-                            "aplication/json":{
+                            "application/json":{
                                 "schema": {
                                     "$ref": "#/components/schemas/Turma"
-                                },
-                                "exemples":{
-                                    "turma":{
-                                        "value":{
-                                            "nome": "Guimaraes turma A",
-                                            "modulo_id": 1
-                                        }
-                                    }
                                 }
                             }
                         }
@@ -79,7 +71,84 @@
                         }
                     }
                 }
+            },
+
+            "/criarDocente":{
+                "post":{
+                    "sumary": "",
+                    "description": "Essa rota será responsável por criar uma nova turma",
+                    "tags": ["Docente"],
+                    "requestBody":{
+                        "content":{
+                            "application/json":{
+                                "schema": {
+                                    "$ref": "#/components/schemas/Docente"
+                                }
+                            }
+                        }
+                    },
+                    "responses":{
+                        "200":{
+                            "description": "OK",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Docente"
+                                    }
+                                }
+                            }
+                        },
+                        "500":{
+                            "description": "Ocorreu um erro do lado do servidor",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Docente"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            "/buscarDocentes":{
+                "get":{
+                    "sumary": "",
+                    "description": "Essa rota será responsável por buscar todas as Turmas ativa no sistema",
+                    "tags": ["Docente"],
+                    "responses":{
+                        "403":{
+                            "description": "Nenhum registro encontrado!"
+                        },
+                        "200":{
+                            "description": "OK",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Docente"
+                                    }
+                                }
+                            }
+                        },
+                        "404":{
+                            "description": "Nenhum registro encontrado",
+                            "content":{
+                                "aplication/json":{
+                                    "schema":{
+                                        "type": "object",
+                                        "$ref": "#/components/schemas/Docentes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
+
         },
         "components":{
             "schemas":{
@@ -89,9 +158,31 @@
                         "nome": {
                             "type": "string"
                         },
-                        "modulo_id":{
+                        "modulo_Id":{
                             "type": "number",
                             "description": "valor de 0 a 6 onde a posição 0 significa que a turma não foi iniciada"
+                        },
+                        "ativo":{
+                            "type": "number",
+                            "description": "valor default 1 onde significa ativo e 0 inativo"
+                        }
+                    }
+                },
+
+                "Docente":{
+                    "type": "object",
+                    "properties": {
+                        "nome": {
+                            "type": "string"
+                        },
+                        "email":{
+                            "type": "string"
+                        },
+                        "dataNascimento":{
+                            "type": "string"
+                        },
+                        "turma_Id":{
+                            "type": "number"
                         },
                         "ativo":{
                             "type": "number",

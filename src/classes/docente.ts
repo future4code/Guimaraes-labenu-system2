@@ -19,8 +19,8 @@ export class Docente extends DocenteServices implements IDocente {
         this.ativo = ativo
     }
 
-    async criarDocente(Docente: Docente): Promise<void> {
-        this.createDocente(Docente)
+    async criarDocente(Docente: Docente): Promise<object> {
+       return await this.createDocente(Docente)
     }
 
     async buscarDocentes(): Promise<[]> {
