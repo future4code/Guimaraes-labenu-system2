@@ -10,8 +10,8 @@ export class DocenteServices extends RepositoryBase{
         return await this.findAll("Docentes")
     }
 
-    async createDocente(docente: Docente): Promise<void>{
-        await this.create("Docentes", docente)
+    async createDocente(docente: Docente): Promise<object>{
+        return await this.create("Docentes", docente)
     }
     
 }

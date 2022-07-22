@@ -11,8 +11,8 @@ export class RepositoryBase implements IRepositoryBase{
         return await connection.from(tableName).select("*").where({ ativo: 1 }) as any
     }
 
-    async create(tableName: string, objectClass: object ): Promise<void> {
-       await connection.from(tableName).insert(objectClass)
+    async create(tableName: string, objectClass: object ): Promise<object> {
+       return await connection.from(tableName).insert(objectClass)
     }
 
     update(tableName: string, id: number): boolean{

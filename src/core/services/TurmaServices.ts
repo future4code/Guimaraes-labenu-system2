@@ -10,8 +10,8 @@ export class TurmaServices extends RepositoryBase{
         return await this.findAll("Turmas")
     }
 
-    async createTurma(turma: Turma): Promise<void>{
-        await this.create("Turmas", turma)
+    async createTurma(turma: Turma): Promise<object>{
+        return await this.create("Turmas", turma)
     }
     
 }

@@ -11,6 +11,15 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFileDocument))
 
 const version: string = "v1"
 
+
+app.post(`/${version}/criarTurma`, async (req: Request, res: Response) => {
+    const {nome, modulo_Id } = req.body as any
+       
+    const turma = new Turma(nome, modulo_Id, 1)     
+    const result: any =  await turma.createTurma(turma)
+     res.status(200).send({ message: "OK", result: result[0] })
+})
+
 app.get(`/${version}/buscarTurmasAtivas`, async (req: Request, res: Response ) =>{
     try {
         const turma = new Turma()
@@ -36,23 +45,11 @@ app.get(`/${version}/buscarDocentes`, async (req: Request, res: Response ) =>{
 })
 
 app.post(`/${version}/criarDocente`, async (req: Request, res: Response) => {
-     const {nome, email, dataNascimento, turma_Id} = req.body as any
+    const {nome, email, dataNascimento, turma_Id} = req.body as any
      
      
-     const newdataNascimento = moment(dataNascimento).format("YYYY-MM-DD")
-     
-     const docente = new Docente(nome, email, newdataNascimento, turma_Id, 1)
-     
-     await docente.criarDocente(docente)
-     res.status(200).send("deu certo")
+    const newdataNascimento = moment(dataNascimento).format("YYYY-MM-DD")     
+    const docente = new Docente(nome, email, newdataNascimento, turma_Id, 1)     
+    const result: any =  await docente.criarDocente(docente)
+     res.status(200).send({ message: "OK", result: result[0] })
 })
-
-
-// async function create(){
-//     const newTurma = new Turma("Guimaraes w",1)
-//     await newTurma.criarTurma(newTurma).then(response => console.log("meu respons", response)).catch(e=> console.log("error", e))
-// }
-
-// create()
-
-// await newTurma.criarTurma(newTurma).then(response => console.log("meu respons", response)).catch(e=> console.log("error", e))
