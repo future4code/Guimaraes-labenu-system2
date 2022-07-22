@@ -5,23 +5,25 @@ import { DocenteServices } from "../core/services/DocenteServices";
 export class Docente extends DocenteServices implements IDocente {
     public nome?: string
     public email?: string
-    public dataNascimento?: number
+    public dataNascimento?: string
     public turma_Id?: string
+    public ativo?: number
     
 
-    constructor (nome?: string, email?: string, dataNascimento?: number, turma_Id?: string){
+    constructor (nome?: string, email?: string, dataNascimento?: string, turma_Id?: string, ativo?: number){
         super()
         this.nome = nome,
         this.email = email,
         this.dataNascimento = dataNascimento,
-        this.turma_Id = turma_Id
+        this.turma_Id = turma_Id,
+        this.ativo = ativo
     }
 
     async criarDocente(Docente: Docente): Promise<void> {
         this.createDocente(Docente)
     }
 
-    async buscarDocente(): Promise<[]> {
+    async buscarDocentes(): Promise<[]> {
         return  await this.all()
     }
 
